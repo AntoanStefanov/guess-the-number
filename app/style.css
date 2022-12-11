@@ -26,18 +26,22 @@ header {
   border: none;
   border-radius: 5%;
   cursor: pointer;
-  
 }
 
 .question-mark {
-  color: rgb(34, 34, 34);
   background: rgb(238, 238, 238);
   text-align: center;
   width: 200px;
+  color: rgb(34, 34, 34);
   height: 150px;
   font-size: 50px;
   padding-top: 50px;
   margin: auto;
+}
+
+.question-mark:hover {
+  background: rgb(34, 34, 34);
+  color: rgb(238, 238, 238);
 }
 
 h1 {
@@ -51,7 +55,6 @@ h1 {
   float: left;
   align-items: center;
   margin-top: 50px;
-
 }
 
 .guess {
@@ -71,9 +74,10 @@ h1 {
 .right {
   width: 50%;
   float: right;
-  margin-top: 50px;
   font-size: 1.3em;
-
+  align-items: center;
+  margin: auto;
+  margin-top: 50px;
 }
 
 .btn.check {
@@ -81,4 +85,27 @@ h1 {
   text-align: center;
   margin: auto;
   margin-top: 30px;
+}
+
+.message {
+  margin-bottom: 100px;
+}
+
+.label-score {
+  margin-bottom: 30px;
+}
+
+.quiz-mark-line {
+  border: 5px solid;
+  color: inherit;
+}
+
+.btn:hover {
+  background-color: #2d0fd4; /* Green */
+  color: white;
+}
+
+.btn.check:hover {
+  background-color: #4caf50; /* Green */
+  color: white;
 }
