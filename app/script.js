@@ -18,3 +18,6 @@ console.log(getMessage);
 
 console.log(queryMessage.textContent);
 console.log(getMessage.textContent);
+
+// (query/get)Message is an element,
+// while .textContent is a property of that element.
