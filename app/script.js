@@ -86,4 +86,21 @@ console.log(queryMessage.textContent);
 
 // Let's select and manipulate some elements.
 
-queryMessage.textContent = 'Correct Number!';
+queryMessage.textContent = 'Correct Number!'; // DOM manipulation.
+// We manipulated the text content of a DOM node. /the paragraph element/
+
+const numberMark = document.querySelector('.number');
+const currentScore = document.querySelector('.score');
+
+numberMark.textContent = 13;
+currentScore.textContent = 18;
+
+console.log(numberMark, currentScore);
+
+// For input fields, to get the actual value, we use the value property (.value)
+// We can also use it to set a value.
+const numberGuess = document.querySelector('.guess');
+console.log(numberGuess);
+console.log(numberGuess.value);
+numberGuess.value = 2;
+console.log(numberGuess.value);
