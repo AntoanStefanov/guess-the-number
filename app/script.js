@@ -80,4 +80,10 @@ console.log(queryMessage.textContent);
 // Besides, the DOM, there are actually A TON more web APIs, such as,
 // Timers, the Fetch API, and many more /More, later/.
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// https://www.w3schools.com/js/js_api_intro.asp !!!! (Browser APIs)
 
+// 72.
+
+// Let's select and manipulate some elements.
+
+queryMessage.textContent = 'Correct Number!';
