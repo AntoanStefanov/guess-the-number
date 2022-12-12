@@ -100,7 +100,9 @@ console.log(numberMark, currentScore);
 // For input fields, to get the actual value, we use the value property (.value)
 // We can also use it to set a value.
 const numberGuess = document.querySelector('.guess');
+// https://stackoverflow.com/questions/53305284/how-can-i-console-the-list-of-dom-object-with-javascript !!
 console.log(numberGuess);
+console.dir(numberGuess);
 console.log(numberGuess.value);
 numberGuess.value = 2;
 console.log(numberGuess.value);
