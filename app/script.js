@@ -128,7 +128,7 @@ console.log(numberGuess.value);
 // Bcs, this is where the click that we're interested in will happen.
 
 const checkBtn = document.querySelector('.btn.check');
-console.log(checkBtn);
+
 // On that element we can call the addEventListener method.
 // args:
 //  type/name of event (ex. 'click') : string,
@@ -146,10 +146,20 @@ console.log(checkBtn);
 
 const minNumber = 1;
 const maxNumber = 20;
+let currentScore = 20;
 
+// Math is object, which has a lot of properties and methods.
+// min and max included.
 const secretNumber = ((min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 })(minNumber, maxNumber); // Immediately-Invoked Function Expressions (IIFE)
+
+const decreaseScore = () => {
+  document.querySelector('.score').textContent = --currentScore;
+};
+
+// Remove
+document.querySelector('.number').textContent = secretNumber;
 
 // ************** function expression ****************************
 // without 'const test = ' is just a function value.
@@ -176,8 +186,10 @@ checkBtn.addEventListener('click', function (ev) {
     messageEl.textContent = 'Correct number!';
   } else if (userGuess > secretNumber) {
     messageEl.textContent = 'Too High!';
+    decreaseScore();
   } else if (userGuess < secretNumber) {
     messageEl.textContent = 'Too Low!';
+    decreaseScore();
   }
 });
 
