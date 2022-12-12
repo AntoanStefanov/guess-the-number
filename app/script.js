@@ -1,5 +1,6 @@
 'use strict';
 
+/*
 // All of the interface is implemented in HTML. (index.html)
 // We will select HTML elements based on classes, id, tag names,
 // in order to manipulate them (DOM manipulation).
@@ -106,3 +107,55 @@ console.dir(numberGuess);
 console.log(numberGuess.value);
 numberGuess.value = 2;
 console.log(numberGuess.value);
+
+*/
+
+// 73.
+// Let's make JS code reactive when something in DOM happens.
+
+// For that we need Event Listener.
+// Event is something that happens on the page. ex. a mouse click/moving,
+// key press or many other events.
+// Then with an event listener, we can wait for a certain event to happen,
+// and then REACT to it.
+
+// Let's give it a try.
+
+// In order to listen for events, we first need to select the element,
+// the place where the event should happen...
+
+// In this case, we want to listen to the event on the button element('Check').
+// Bcs, this is where the click that we're interested in will happen.
+
+const checkBtn = document.querySelector('.btn.check');
+console.log(checkBtn);
+// On that element we can call the addEventListener method.
+// args:
+//  type/name of event (ex. 'click') : string,
+//  tell the event listener what to do /specify the reaction to the click Event.
+//  We do that by defining a function(listener), that function will contain
+//  exactly the code that should be executed whenever this click event happens,
+//  On this CHECK BUTTON.
+//  That function is called the EVENT HANDLER.
+// This addEventListener method is a special kind of function,
+// that because as a second argument, it expects 'event handler' function
+// As a second argument we need to pass in a function value.
+// A function is also JUST A VALUE, if a function is JUST A VALUE,
+// Then we can also pass it into another function as an arg.
+// just like any other value, like a string or a number.
+
+// *************WT*
+// const test = function test1() {
+//   console.log(2);
+// };
+// test();
+// **************F*       anonymous function/function expression/(ev.handler)
+checkBtn.addEventListener('click', function (ev) {
+// we select this el,because we want the value of the num input element,
+// when 'check' button is clicked, to do the check.
+  const numberInputEl = document.querySelector('.guess');
+  console.log(numberInputEl.value);
+});
+
+// There are multiple ways to listen for events in JS,
+// but using this addEventListener method is the best one and the most used one.
