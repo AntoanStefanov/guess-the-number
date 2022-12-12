@@ -178,7 +178,9 @@ function changeCSS() {
   checkBtn.disabled = true;
 
   const inputEl = document.querySelector('.guess');
+  // https://stackoverflow.com/questions/39033070/css-color-vs-background-color-vs-background
   inputEl.style.backgroundColor = 'green';
+  // Any style property has to be set with STRING. '30px', 'white' and so on....
   inputEl.style.color = 'white';
 
   document.querySelector('.number').textContent = secretNumber;
