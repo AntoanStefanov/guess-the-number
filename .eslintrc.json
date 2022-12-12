@@ -1,0 +1,35 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "google",
+    "overrides": [],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        // https://palantir.github.io/tslint/rules/space-before-function-paren/
+        // https://eslint.org/docs/latest/rules/space-before-function-paren#options
+        // "space-before-function-paren": [
+        //     "never"
+        // ]
+        // "space-before-function-paren": ["error", "always"]
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ],
+        // https://eslint.org/docs/latest/rules/quotes -> messageEl.textContent = "You've lost! Try Again!";
+        "quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true
+            }
+        ]
+    }
+}
