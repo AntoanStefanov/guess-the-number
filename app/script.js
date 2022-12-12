@@ -144,19 +144,12 @@ console.log(checkBtn);
 // Then we can also pass it into another function as an arg.
 // just like any other value, like a string or a number.
 
-/**
- * @param {int} min The minimum limit - inclusive.
- * @param {int} max The max limit - inclusive.
- * @return {int} random number in that range.
- */
-function getRandomArbitrary(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 const minNumber = 1;
 const maxNumber = 20;
 
-const secrectNumber = getRandomArbitrary(minNumber, maxNumber);
+const secretNumber = ((min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+})(minNumber, maxNumber); // Immediately-Invoked Function Expressions (IIFE)
 
 // ************** function expression ****************************
 // without 'const test = ' is just a function value.
@@ -178,9 +171,13 @@ checkBtn.addEventListener('click', function (ev) {
   // First scenario : always assume that there is actually no input.
   // Case: No guess (0 is a falsy value).
   if (!userGuess) {
-    messageEl.textContent = `No number! Try again!`;
-  } else if (secrectNumber === userGuess) {
-    messageEl.textContent = `Correct number!`;
+    messageEl.textContent = 'No number! Try again!';
+  } else if (userGuess === secretNumber) {
+    messageEl.textContent = 'Correct number!';
+  } else if (userGuess > secretNumber) {
+    messageEl.textContent = 'Too High!';
+  } else if (userGuess < secretNumber) {
+    messageEl.textContent = 'Too Low!';
   }
 });
 
