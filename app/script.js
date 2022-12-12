@@ -161,6 +161,7 @@ checkBtn.addEventListener('click', function (ev) {
 
   const messageEl = document.querySelector('.message');
 
+  // First scenario : always assume that there is actually no input.
   // Case: No guess (0 is a falsy value).
   if (!userGuess) {
     messageEl.textContent = `No number! Try again!`;
