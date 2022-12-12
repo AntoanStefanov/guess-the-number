@@ -200,7 +200,7 @@ checkBtn.addEventListener('click', function (ev) {
   }
 
   if (currentScore === 0) {
-    messageEl.textContent = 'You\'ve lost! Try Again!';
+    messageEl.textContent = "You've lost! Try Again!";
     checkBtn.disabled = true;
   }
 });
