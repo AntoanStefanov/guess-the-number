@@ -158,6 +158,13 @@ checkBtn.addEventListener('click', function (ev) {
   // Whenever we get a value from the user interface(UI), it's a STRING.
   const userGuess = Number(numberInputEl.value);
   console.log(userGuess);
+
+  const messageEl = document.querySelector('.message');
+
+  // Case: No guess (0 is a falsy value).
+  if (!userGuess) {
+    messageEl.textContent = `No number! Try again!`;
+  }
 });
 
 // There are multiple ways to listen for events in JS,
