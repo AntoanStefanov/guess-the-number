@@ -144,6 +144,20 @@ console.log(checkBtn);
 // Then we can also pass it into another function as an arg.
 // just like any other value, like a string or a number.
 
+/**
+ * @param {int} min The minimum limit - inclusive.
+ * @param {int} max The max limit - inclusive.
+ * @return {int} random number in that range.
+ */
+function getRandomArbitrary(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const minNumber = 1;
+const maxNumber = 20;
+
+const secrectNumber = getRandomArbitrary(minNumber, maxNumber);
+
 // ************** function expression ****************************
 // without 'const test = ' is just a function value.
 // const test = function () {
@@ -165,6 +179,8 @@ checkBtn.addEventListener('click', function (ev) {
   // Case: No guess (0 is a falsy value).
   if (!userGuess) {
     messageEl.textContent = `No number! Try again!`;
+  } else if (secrectNumber === userGuess) {
+    messageEl.textContent = `Correct number!`;
   }
 });
 
@@ -176,3 +192,5 @@ checkBtn.addEventListener('click', function (ev) {
 // Note that, we do NOT call the function(event handler) anywhere.
 // We just define and pass the function in the addEventListener method.
 // But it's the JS engine who'll call this function as soon as the event happens
+
+// 74.
