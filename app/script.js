@@ -144,18 +144,27 @@ console.log(checkBtn);
 // Then we can also pass it into another function as an arg.
 // just like any other value, like a string or a number.
 
-// *************WT*
-// const test = function test1() {
+// ************** function expression ****************************
+// without 'const test = ' is just a function value.
+// const test = function () {
 //   console.log(2);
 // };
 // test();
-// **************F*       anonymous function/function expression/(ev.handler)
+// ***************       anonymous function/function expression/(ev.handler)
 checkBtn.addEventListener('click', function (ev) {
-// we select this el,because we want the value of the num input element,
-// when 'check' button is clicked, to do the check.
+  // we select this el,because we want the value of the num input element,
+  // when 'check' button is clicked, to do the check.
   const numberInputEl = document.querySelector('.guess');
-  console.log(numberInputEl.value);
+  // Whenever we get a value from the user interface(UI), it's a STRING.
+  const userGuess = Number(numberInputEl.value);
+  console.log(userGuess);
 });
 
 // There are multiple ways to listen for events in JS,
 // but using this addEventListener method is the best one and the most used one.
+
+// !!!!!!!!!!!!!!!!
+// The event handler contains the code we want to be executed when event happens
+// Note that, we do NOT call the function(event handler) anywhere.
+// We just define and pass the function in the addEventListener method.
+// But it's the JS engine who'll call this function as soon as the event happens
