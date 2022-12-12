@@ -167,8 +167,24 @@ const decreaseScore = () => {
   document.querySelector('.score').textContent = --currentScore;
 };
 
+/**
+ * It just changes CSS when player wins.
+ * @return {void}
+ */
+function changeCSS() {
+  const bodyEl = document.querySelector('body');
+  console.log(bodyEl);
+  bodyEl.style.background = 'green';
+  checkBtn.disabled = true;
+
+  const inputEl = document.querySelector('.guess');
+  inputEl.style.background = 'green';
+  inputEl.style.color = 'white';
+
+  document.querySelector('.number').textContent = secretNumber;
+}
+
 // Remove
-document.querySelector('.number').textContent = secretNumber;
 
 // ************** function expression ****************************
 // without 'const test = ' is just a function value.
@@ -191,6 +207,7 @@ checkBtn.addEventListener('click', function (ev) {
     messageEl.textContent = 'No number! Try again!';
   } else if (userGuess === secretNumber) {
     messageEl.textContent = 'Correct number!';
+    changeCSS();
   } else if (userGuess > secretNumber) {
     messageEl.textContent = 'Too High!';
     decreaseScore();
@@ -214,4 +231,6 @@ checkBtn.addEventListener('click', function (ev) {
 // We just define and pass the function in the addEventListener method.
 // But it's the JS engine who'll call this function as soon as the event happens
 
-// 74.
+// 75.
+// The DOM actually includes CSS. So, with DOM manipulation,
+// we can also change Styles.
