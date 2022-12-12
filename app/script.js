@@ -146,6 +146,14 @@ const checkBtn = document.querySelector('.btn.check');
 
 const minNumber = 1;
 const maxNumber = 20;
+
+// It's better to have that kind of app data in code, instead of,
+// reading and reassigning it from DOM.
+// Create variables that HOLD the app data in our CODE.
+// DO NOT RELY on the DOM to hold our data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// this variable can also be called a state variable, bcs this score is part
+// of the so-called application state(all data relevant to the app).
+// We want all the data always to be available in our code, not just in the DOM.
 let currentScore = 20;
 
 // Math is object, which has a lot of properties and methods.
@@ -153,6 +161,7 @@ let currentScore = 20;
 const secretNumber = ((min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 })(minNumber, maxNumber); // Immediately-Invoked Function Expressions (IIFE)
+// this secretNumber is also part of the state of our application.
 
 const decreaseScore = () => {
   document.querySelector('.score').textContent = --currentScore;
@@ -174,8 +183,6 @@ checkBtn.addEventListener('click', function (ev) {
   const numberInputEl = document.querySelector('.guess');
   // Whenever we get a value from the user interface(UI), it's a STRING.
   const userGuess = Number(numberInputEl.value);
-  console.log(userGuess);
-
   const messageEl = document.querySelector('.message');
 
   // First scenario : always assume that there is actually no input.
@@ -190,6 +197,11 @@ checkBtn.addEventListener('click', function (ev) {
   } else if (userGuess < secretNumber) {
     messageEl.textContent = 'Too Low!';
     decreaseScore();
+  }
+
+  if (currentScore === 0) {
+    messageEl.textContent = 'You\'ve lost! Try Again!';
+    checkBtn.disabled = true;
   }
 });
 
