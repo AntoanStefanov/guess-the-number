@@ -172,13 +172,13 @@ const decreaseScore = () => {
  * @return {void}
  */
 function changeCSS() {
-  const bodyEl = document.querySelector('body');
+  const bodyEl = document.querySelector('body'); // body tag's enough (one body)
   console.log(bodyEl);
-  bodyEl.style.background = 'green';
+  bodyEl.style.backgroundColor = 'green'; // multiple style words -> camelCase.
   checkBtn.disabled = true;
 
   const inputEl = document.querySelector('.guess');
-  inputEl.style.background = 'green';
+  inputEl.style.backgroundColor = 'green';
   inputEl.style.color = 'white';
 
   document.querySelector('.number').textContent = secretNumber;
