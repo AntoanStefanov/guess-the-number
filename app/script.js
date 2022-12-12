@@ -183,6 +183,11 @@ function changeCSS() {
   // Any style property has to be set with STRING. '30px', 'white' and so on....
   inputEl.style.color = 'white';
 
+  // Above styles are actually set as Inline Styles.
+  // <input ...style="background-color: green; color: white;">
+  // directly applied in the HTML using style attribute.
+  // We are not chaning the CSS file or anything like that.
+
   document.querySelector('.number').textContent = secretNumber;
 }
 
