@@ -128,7 +128,7 @@ console.log(numberGuess.value);
 // Bcs, this is where the click that we're interested in will happen.
 
 const checkBtn = document.querySelector('.btn.check');
-
+const againBtn = document.querySelector('.btn.again');
 // On that element we can call the addEventListener method.
 // args:
 //  type/name of event (ex. 'click') : string,
@@ -147,6 +147,10 @@ const checkBtn = document.querySelector('.btn.check');
 const minNumber = 1;
 const maxNumber = 20;
 
+const getRandomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
 // It's better to have that kind of app data in code, instead of,
 // reading and reassigning it from DOM.
 // Create variables that HOLD the app data in our CODE.
@@ -158,9 +162,7 @@ let currentScore = 20;
 
 // Math is object, which has a lot of properties and methods.
 // min and max included.
-const secretNumber = ((min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-})(minNumber, maxNumber); // Immediately-Invoked Function Expressions (IIFE)
+let secretNumber = getRandomNumber(minNumber, maxNumber);
 // this secretNumber is also part of the state of our application.
 
 const decreaseScore = () => {
@@ -173,15 +175,14 @@ const decreaseScore = () => {
  */
 function changeCSS() {
   const bodyEl = document.querySelector('body'); // body tag's enough (one body)
-  console.log(bodyEl);
-  bodyEl.style.backgroundColor = 'green'; // multiple style words -> camelCase.
+  bodyEl.style.backgroundColor = '#4caf50'; // multiple style words-> camelCase.
   checkBtn.disabled = true;
 
   const inputEl = document.querySelector('.guess');
   // https://stackoverflow.com/questions/39033070/css-color-vs-background-color-vs-background
-  inputEl.style.backgroundColor = 'green';
   // Any style property has to be set with STRING. '30px', 'white' and so on....
-  inputEl.style.color = 'white';
+  inputEl.style.backgroundColor = '#4caf50';
+  inputEl.style.color = '#EEEEEE';
 
   // Above styles are actually set as Inline Styles.
   // <input ...style="background-color: green; color: white;">
@@ -190,8 +191,6 @@ function changeCSS() {
 
   document.querySelector('.number').textContent = secretNumber;
 }
-
-// Remove
 
 // ************** function expression ****************************
 // without 'const test = ' is just a function value.
@@ -227,6 +226,23 @@ checkBtn.addEventListener('click', function (ev) {
     messageEl.textContent = "You've lost! Try Again!";
     checkBtn.disabled = true;
   }
+});
+
+againBtn.addEventListener('click', function (ev) {
+  const messageEl = document.querySelector('.message');
+  const inputEl = document.querySelector('.guess');
+  const bodyEl = document.querySelector('body');
+
+  currentScore = 20;
+  document.querySelector('.score').textContent = currentScore;
+  secretNumber = getRandomNumber(minNumber, maxNumber);
+  document.querySelector('.number').textContent = '?';
+  messageEl.textContent = 'Start Guessing...';
+  bodyEl.style.backgroundColor = '#222222';
+  inputEl.value = '';
+  inputEl.style.color = '#EEEEEE';
+  inputEl.style.backgroundColor = '#222222';
+  checkBtn.disabled = false;
 });
 
 // There are multiple ways to listen for events in JS,
