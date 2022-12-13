@@ -33,12 +33,11 @@ function game() {
     scoreEl.textContent = --currentScore;
   };
 
-  const toggleEl = (el, disable = false) => {
-    if (disable) el.disabled = true;
-    else el.disabled = false;
-  };
+  const toggleEl = (el, disable = false) => (el.disabled = disable);
 
-  const bodyEl = document.querySelector('body');
+  const getEl = (selector) => document.querySelector(selector);
+
+  const bodyEl = getEl('body');
 
   let currentScore = 20;
   let highScore = 0;
@@ -48,11 +47,11 @@ function game() {
     if (ev.target.tagName.toLowerCase() === 'button') {
       const className = ev.target.attributes.class.value;
 
-      const hiddenNumberEl = document.querySelector('.number');
-      const checkBtn = document.querySelector('.btn.check');
-      const messageEl = document.querySelector('.message');
-      const inputEl = document.querySelector('.guess');
-      const scoreEl = document.querySelector('.score');
+      const hiddenNumberEl = getEl('.number');
+      const checkBtn = getEl('.btn.check');
+      const messageEl = getEl('.message');
+      const inputEl = getEl('.guess');
+      const scoreEl = getEl('.score');
 
       if (className === 'btn check') {
         const userGuess = Number(inputEl.value);
@@ -71,7 +70,7 @@ function game() {
 
           if (currentScore > highScore) {
             highScore = currentScore;
-            document.querySelector('.highscore').textContent = highScore;
+            getEl('.highscore').textContent = highScore;
           }
 
           toggleEl(checkBtn, true);
