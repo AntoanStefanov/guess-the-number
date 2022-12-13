@@ -1,5 +1,6 @@
 'use strict';
 
+// 71.
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // The DOM and DOM methods are actually part of something called the web APIs.
 // The web APIs are like libraries that that browsers implement(Chrome, Firefox)
@@ -71,13 +72,20 @@ function game() {
           return;
         }
 
+        // This could become a ternary operator!
+        /* It has value for true and false.(checking one condition)
         if (userGuess > secretNumber) {
           messageEl.textContent = 'Too High!';
         } else if (userGuess < secretNumber) {
           messageEl.textContent = 'Too Low!';
         }
+        */
+        // Like this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+        messageEl.textContent =
+          userGuess > secretNumber ? 'Too High!' : 'Too Low!';
 
         decreaseScore(scoreEl);
+
         if (currentScore === 0) {
           messageEl.textContent = "You've lost! Try Again!";
           checkBtn.disabled = true;
