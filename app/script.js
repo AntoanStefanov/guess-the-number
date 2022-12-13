@@ -157,6 +157,7 @@ const getRandomNumber = (min, max) => {
 // of the so-called application state(all data relevant to the app).
 // We want all the data always to be available in our code, not just in the DOM.
 let currentScore = 20;
+let highScore = 0;
 
 // Math is object, which has a lot of properties and methods.
 // min and max included.
@@ -203,13 +204,17 @@ bodyEl.addEventListener('click', function (ev) {
       // Win
       if (userGuess === secretNumber) {
         document.querySelector('.number').textContent = secretNumber;
-        messageEl.textContent = 'Correct number!';
+        messageEl.textContent = '🎉 Correct number!';
         // Any style property has to be set with STRING. '30px', 'white', so on
         bodyEl.style.backgroundColor = '#4caf50'; // 2 or more words->camelCase.
         // Above styles are actually set as Inline Styles.
         // <input ...style="background-color: green; color: white;">
         // directly applied in the HTML using style attribute.
         // We are not changing the CSS file or anything like that.
+        if (currentScore > highScore) {
+          highScore = currentScore;
+          document.querySelector('.highscore').textContent = highScore;
+        }
         checkBtn.disabled = true;
         return;
       }
