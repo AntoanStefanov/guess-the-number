@@ -211,10 +211,12 @@ bodyEl.addEventListener('click', function (ev) {
         // <input ...style="background-color: green; color: white;">
         // directly applied in the HTML using style attribute.
         // We are not changing the CSS file or anything like that.
+
         if (currentScore > highScore) {
           highScore = currentScore;
           document.querySelector('.highscore').textContent = highScore;
         }
+
         checkBtn.disabled = true;
         return;
       }
