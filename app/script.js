@@ -18,7 +18,7 @@
 // https://www.w3schools.com/js/js_api_intro.asp !!!! (Browser APIs)
 
 /**
- *  @return {void} Game. A bit more dry, though.
+ *  @return {void} Game. A bit more DRY, though.
  */
 function game() {
   const minNumber = 1;
@@ -36,6 +36,26 @@ function game() {
   const toggleEl = (el, disable = false) => (el.disabled = disable);
 
   const getEl = (selector) => document.querySelector(selector);
+
+  const changeElCSSproperty = (el, prop, value) => (el.style[prop] = value);
+
+  const onWin = function (hiddenNumberEl, messageEl, checkBtn) {
+    displayContent(hiddenNumberEl, secretNumber);
+    displayContent(messageEl, '🎉 Correct number!');
+    changeElCSSproperty(bodyEl, 'backgroundColor', '#4caf50'); // green.
+
+    if (currentScore > highScore) {
+      highScore = currentScore;
+      getEl('.highscore').textContent = highScore;
+    }
+
+    toggleEl(checkBtn, true);
+  };
+
+  const noMoreTries = function (messageEl, checkBtn) {
+    displayContent(messageEl, "You've lost! Try Again!");
+    toggleEl(checkBtn, true);
+  };
 
   const bodyEl = getEl('body');
 
@@ -61,19 +81,8 @@ function game() {
           return;
         }
 
-        // Win
         if (userGuess === secretNumber) {
-          displayContent(hiddenNumberEl, secretNumber);
-          displayContent(messageEl, '🎉 Correct number!');
-
-          bodyEl.style.backgroundColor = '#4caf50';
-
-          if (currentScore > highScore) {
-            highScore = currentScore;
-            getEl('.highscore').textContent = highScore;
-          }
-
-          toggleEl(checkBtn, true);
+          onWin(hiddenNumberEl, messageEl, checkBtn);
           return;
         }
 
@@ -85,8 +94,7 @@ function game() {
         decreaseScore(scoreEl);
 
         if (currentScore === 0) {
-          displayContent(messageEl, "You've lost! Try Again!");
-          toggleEl(checkBtn, true);
+          noMoreTries(messageEl, checkBtn);
         }
       } else if (className === 'btn again') {
         secretNumber = getRandomNumber(minNumber, maxNumber);
@@ -96,7 +104,7 @@ function game() {
         displayContent(hiddenNumberEl, '?');
         displayContent(messageEl, 'Start Guessing...');
 
-        bodyEl.style.backgroundColor = '#222222';
+        changeElCSSproperty(bodyEl, 'backgroundColor', '#222222'); // default
         inputEl.value = '';
         toggleEl(checkBtn);
       }
