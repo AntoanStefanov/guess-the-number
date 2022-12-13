@@ -176,15 +176,18 @@ const bodyEl = document.querySelector('body'); // body tag's enough (one body)
 // };
 // test();
 // ***************       anonymous function/function expression/(ev.handler)
+//                       anonymous(no name) handler function
 bodyEl.addEventListener('click', function (ev) {
   // console.dir(ev.target);
   // console.log(ev.target.attributes.class.value);
   if (ev.target.tagName.toLowerCase() === 'button') {
+    const className = ev.target.attributes.class.value;
+
     const checkBtn = document.querySelector('.btn.check');
     const messageEl = document.querySelector('.message');
     const inputEl = document.querySelector('.guess');
 
-    if (ev.target.attributes.class.value === 'btn check') {
+    if (className === 'btn check') {
       // we select this el,because we want the value of the num input element,
       // when 'check' button is clicked, to do the check.
       // Whenever we get a value from the user interface(UI), it's a STRING.
@@ -222,8 +225,8 @@ bodyEl.addEventListener('click', function (ev) {
         messageEl.textContent = "You've lost! Try Again!";
         checkBtn.disabled = true;
       }
-    } else if (ev.target.attributes.class.value === 'btn again') {
-      currentScore = 20;
+    } else if (className === 'btn again') {
+      currentScore = maxNumber;
       document.querySelector('.score').textContent = currentScore;
       secretNumber = getRandomNumber(minNumber, maxNumber);
       document.querySelector('.number').textContent = '?';
