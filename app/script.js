@@ -18,7 +18,7 @@
 // https://www.w3schools.com/js/js_api_intro.asp !!!! (Browser APIs)
 
 /**
- *  @return {void} Game.
+ *  @return {void} Game. A bit more dry, though.
  */
 function game() {
   const minNumber = 1;
