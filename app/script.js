@@ -167,30 +167,7 @@ const decreaseScore = () => {
   document.querySelector('.score').textContent = --currentScore;
 };
 
-/**
- * It just changes CSS when player wins.
- * @param {Element} checkBtn changing it's accessablity.
- * @return {void}
- */
-function changeCSS(checkBtn) {
-  const bodyEl = document.querySelector('body'); // body tag's enough (one body)
-  bodyEl.style.backgroundColor = '#4caf50'; // multiple style words-> camelCase.
-  checkBtn.disabled = true;
-
-  const inputEl = document.querySelector('.guess');
-  // https://stackoverflow.com/questions/39033070/css-color-vs-background-color-vs-background
-  // Any style property has to be set with STRING. '30px', 'white' and so on....
-  inputEl.style.color = '#EEEEEE';
-
-  // Above styles are actually set as Inline Styles.
-  // <input ...style="background-color: green; color: white;">
-  // directly applied in the HTML using style attribute.
-  // We are not chaning the CSS file or anything like that.
-
-  document.querySelector('.number').textContent = secretNumber;
-}
-
-const bodyEl = document.querySelector('body');
+const bodyEl = document.querySelector('body'); // body tag's enough (one body)
 
 // ************** function expression ****************************
 // without 'const test = ' is just a function value.
@@ -222,8 +199,15 @@ bodyEl.addEventListener('click', function (ev) {
 
       // Win
       if (userGuess === secretNumber) {
+        document.querySelector('.number').textContent = secretNumber;
         messageEl.textContent = 'Correct number!';
-        changeCSS(checkBtn);
+        // Any style property has to be set with STRING. '30px', 'white', so on
+        bodyEl.style.backgroundColor = '#4caf50'; // 2 or more words->camelCase.
+        // Above styles are actually set as Inline Styles.
+        // <input ...style="background-color: green; color: white;">
+        // directly applied in the HTML using style attribute.
+        // We are not changing the CSS file or anything like that.
+        checkBtn.disabled = true;
         return;
       }
 
@@ -246,7 +230,6 @@ bodyEl.addEventListener('click', function (ev) {
       messageEl.textContent = 'Start Guessing...';
       bodyEl.style.backgroundColor = '#222222';
       inputEl.value = '';
-      inputEl.style.color = '#EEEEEE';
       checkBtn.disabled = false;
     }
   }
