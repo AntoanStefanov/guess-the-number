@@ -24,7 +24,7 @@ function game() {
   const minNumber = 1;
   const maxNumber = 20;
 
-  const changeTextContent = (el, text) => (el.textContent = text);
+  const displayContent = (el, text) => (el.textContent = text);
 
   const getRandomNumber = (min, max) =>
     Math.floor(Math.random() * (max - min + 1)) + min;
@@ -42,7 +42,6 @@ function game() {
 
   let currentScore = 20;
   let highScore = 0;
-
   let secretNumber = getRandomNumber(minNumber, maxNumber);
 
   bodyEl.addEventListener('click', function (ev) {
@@ -59,14 +58,14 @@ function game() {
         const userGuess = Number(inputEl.value);
 
         if (!userGuess) {
-          changeTextContent(messageEl, 'No number! Try again!');
+          displayContent(messageEl, 'No number! Try again!');
           return;
         }
 
         // Win
         if (userGuess === secretNumber) {
-          changeTextContent(hiddenNumberEl, secretNumber);
-          changeTextContent(messageEl, '🎉 Correct number!');
+          displayContent(hiddenNumberEl, secretNumber);
+          displayContent(messageEl, '🎉 Correct number!');
 
           bodyEl.style.backgroundColor = '#4caf50';
 
@@ -79,7 +78,7 @@ function game() {
           return;
         }
 
-        changeTextContent(
+        displayContent(
           messageEl,
           userGuess > secretNumber ? 'Too High!' : 'Too Low!',
         );
@@ -87,16 +86,16 @@ function game() {
         decreaseScore(scoreEl);
 
         if (currentScore === 0) {
-          changeTextContent(messageEl, "You've lost! Try Again!");
+          displayContent(messageEl, "You've lost! Try Again!");
           toggleEl(checkBtn, true);
         }
       } else if (className === 'btn again') {
         secretNumber = getRandomNumber(minNumber, maxNumber);
         currentScore = maxNumber;
 
-        changeTextContent(scoreEl, currentScore);
-        changeTextContent(hiddenNumberEl, '?');
-        changeTextContent(messageEl, 'Start Guessing...');
+        displayContent(scoreEl, currentScore);
+        displayContent(hiddenNumberEl, '?');
+        displayContent(messageEl, 'Start Guessing...');
 
         bodyEl.style.backgroundColor = '#222222';
         inputEl.value = '';
