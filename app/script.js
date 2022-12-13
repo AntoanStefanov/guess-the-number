@@ -33,6 +33,11 @@ function game() {
     scoreEl.textContent = --currentScore;
   };
 
+  const toggleEl = (el, disable = false) => {
+    if (disable) el.disabled = true;
+    else el.disabled = false;
+  };
+
   const bodyEl = document.querySelector('body');
 
   let currentScore = 20;
@@ -70,7 +75,7 @@ function game() {
             document.querySelector('.highscore').textContent = highScore;
           }
 
-          checkBtn.disabled = true;
+          toggleEl(checkBtn, true);
           return;
         }
 
@@ -83,7 +88,7 @@ function game() {
 
         if (currentScore === 0) {
           changeTextContent(messageEl, "You've lost! Try Again!");
-          checkBtn.disabled = true;
+          toggleEl(checkBtn, true);
         }
       } else if (className === 'btn again') {
         secretNumber = getRandomNumber(minNumber, maxNumber);
@@ -95,7 +100,7 @@ function game() {
 
         bodyEl.style.backgroundColor = '#222222';
         inputEl.value = '';
-        checkBtn.disabled = false;
+        toggleEl(checkBtn);
       }
     }
   });
