@@ -60,10 +60,11 @@ h1 {
 .guess {
   display: block;
   border: 5px solid rgb(238, 238, 238);
-  background: rgb(34, 34, 34);
+  /* background: rgb(34, 34, 34); */
   color: inherit;
   font-size: 2.5em;
   font-family: inherit;
+  background-color: inherit;
   text-align: center;
   width: 200px;
   height: 120px;

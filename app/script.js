@@ -180,7 +180,6 @@ function changeCSS(checkBtn) {
   const inputEl = document.querySelector('.guess');
   // https://stackoverflow.com/questions/39033070/css-color-vs-background-color-vs-background
   // Any style property has to be set with STRING. '30px', 'white' and so on....
-  inputEl.style.backgroundColor = '#4caf50';
   inputEl.style.color = '#EEEEEE';
 
   // Above styles are actually set as Inline Styles.
@@ -218,14 +217,14 @@ bodyEl.addEventListener('click', function (ev) {
       // Case: No guess (0 is a falsy value).
       if (!userGuess) {
         messageEl.textContent = 'No number! Try again!';
-        return 0;
+        return;
       }
 
       // Win
       if (userGuess === secretNumber) {
         messageEl.textContent = 'Correct number!';
         changeCSS(checkBtn);
-        return 0;
+        return;
       }
 
       if (userGuess > secretNumber) {
@@ -248,7 +247,6 @@ bodyEl.addEventListener('click', function (ev) {
       bodyEl.style.backgroundColor = '#222222';
       inputEl.value = '';
       inputEl.style.color = '#EEEEEE';
-      inputEl.style.backgroundColor = '#222222';
       checkBtn.disabled = false;
     }
   }
