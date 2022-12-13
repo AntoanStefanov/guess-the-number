@@ -127,8 +127,6 @@ console.log(numberGuess.value);
 // In this case, we want to listen to the event on the button element('Check').
 // Bcs, this is where the click that we're interested in will happen.
 
-const checkBtn = document.querySelector('.btn.check');
-const againBtn = document.querySelector('.btn.again');
 // On that element we can call the addEventListener method.
 // args:
 //  type/name of event (ex. 'click') : string,
@@ -171,9 +169,10 @@ const decreaseScore = () => {
 
 /**
  * It just changes CSS when player wins.
+ * @param {Element} checkBtn changing it's accessablity.
  * @return {void}
  */
-function changeCSS() {
+function changeCSS(checkBtn) {
   const bodyEl = document.querySelector('body'); // body tag's enough (one body)
   bodyEl.style.backgroundColor = '#4caf50'; // multiple style words-> camelCase.
   checkBtn.disabled = true;
@@ -192,6 +191,8 @@ function changeCSS() {
   document.querySelector('.number').textContent = secretNumber;
 }
 
+const bodyEl = document.querySelector('body');
+
 // ************** function expression ****************************
 // without 'const test = ' is just a function value.
 // const test = function () {
@@ -199,50 +200,58 @@ function changeCSS() {
 // };
 // test();
 // ***************       anonymous function/function expression/(ev.handler)
-checkBtn.addEventListener('click', function (ev) {
-  // we select this el,because we want the value of the num input element,
-  // when 'check' button is clicked, to do the check.
-  const numberInputEl = document.querySelector('.guess');
-  // Whenever we get a value from the user interface(UI), it's a STRING.
-  const userGuess = Number(numberInputEl.value);
-  const messageEl = document.querySelector('.message');
+bodyEl.addEventListener('click', function (ev) {
+  // console.dir(ev.target);
+  // console.log(ev.target.attributes.class.value);
+  if (ev.target.tagName.toLowerCase() === 'button') {
+    const checkBtn = document.querySelector('.btn.check');
+    const messageEl = document.querySelector('.message');
+    const inputEl = document.querySelector('.guess');
 
-  // First scenario : always assume that there is actually no input.
-  // Case: No guess (0 is a falsy value).
-  if (!userGuess) {
-    messageEl.textContent = 'No number! Try again!';
-  } else if (userGuess === secretNumber) {
-    messageEl.textContent = 'Correct number!';
-    changeCSS();
-  } else if (userGuess > secretNumber) {
-    messageEl.textContent = 'Too High!';
-    decreaseScore();
-  } else if (userGuess < secretNumber) {
-    messageEl.textContent = 'Too Low!';
-    decreaseScore();
+    if (ev.target.attributes.class.value === 'btn check') {
+      // we select this el,because we want the value of the num input element,
+      // when 'check' button is clicked, to do the check.
+      // Whenever we get a value from the user interface(UI), it's a STRING.
+      const userGuess = Number(inputEl.value);
+
+      // First scenario : always assume that there is actually no input.
+      // Case: No guess (0 is a falsy value).
+      if (!userGuess) {
+        messageEl.textContent = 'No number! Try again!';
+        return 0;
+      }
+
+      // Win
+      if (userGuess === secretNumber) {
+        messageEl.textContent = 'Correct number!';
+        changeCSS(checkBtn);
+        return 0;
+      }
+
+      if (userGuess > secretNumber) {
+        messageEl.textContent = 'Too High!';
+      } else if (userGuess < secretNumber) {
+        messageEl.textContent = 'Too Low!';
+      }
+
+      decreaseScore();
+      if (currentScore === 0) {
+        messageEl.textContent = "You've lost! Try Again!";
+        checkBtn.disabled = true;
+      }
+    } else if (ev.target.attributes.class.value === 'btn again') {
+      currentScore = 20;
+      document.querySelector('.score').textContent = currentScore;
+      secretNumber = getRandomNumber(minNumber, maxNumber);
+      document.querySelector('.number').textContent = '?';
+      messageEl.textContent = 'Start Guessing...';
+      bodyEl.style.backgroundColor = '#222222';
+      inputEl.value = '';
+      inputEl.style.color = '#EEEEEE';
+      inputEl.style.backgroundColor = '#222222';
+      checkBtn.disabled = false;
+    }
   }
-
-  if (currentScore === 0) {
-    messageEl.textContent = "You've lost! Try Again!";
-    checkBtn.disabled = true;
-  }
-});
-
-againBtn.addEventListener('click', function (ev) {
-  const messageEl = document.querySelector('.message');
-  const inputEl = document.querySelector('.guess');
-  const bodyEl = document.querySelector('body');
-
-  currentScore = 20;
-  document.querySelector('.score').textContent = currentScore;
-  secretNumber = getRandomNumber(minNumber, maxNumber);
-  document.querySelector('.number').textContent = '?';
-  messageEl.textContent = 'Start Guessing...';
-  bodyEl.style.backgroundColor = '#222222';
-  inputEl.value = '';
-  inputEl.style.color = '#EEEEEE';
-  inputEl.style.backgroundColor = '#222222';
-  checkBtn.disabled = false;
 });
 
 // There are multiple ways to listen for events in JS,
