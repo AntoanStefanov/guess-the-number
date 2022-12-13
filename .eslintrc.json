@@ -31,6 +31,10 @@
                 "avoidEscape": true
             }
         ],
-        "no-const-assign": "error"
+        "no-const-assign": "error",
+        "indent": [
+            "error",
+            2
+        ]
     }
 }

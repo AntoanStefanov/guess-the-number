@@ -24,20 +24,21 @@ function game() {
   const minNumber = 1;
   const maxNumber = 20;
 
-  const getRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+  const changeTextContent = (el, text) => (el.textContent = text);
 
-  let currentScore = 20;
-  let highScore = 0;
-
-  let secretNumber = getRandomNumber(minNumber, maxNumber);
+  const getRandomNumber = (min, max) =>
+    Math.floor(Math.random() * (max - min + 1)) + min;
 
   const decreaseScore = (scoreEl) => {
     scoreEl.textContent = --currentScore;
   };
 
   const bodyEl = document.querySelector('body');
+
+  let currentScore = 20;
+  let highScore = 0;
+
+  let secretNumber = getRandomNumber(minNumber, maxNumber);
 
   bodyEl.addEventListener('click', function (ev) {
     if (ev.target.tagName.toLowerCase() === 'button') {
@@ -53,14 +54,15 @@ function game() {
         const userGuess = Number(inputEl.value);
 
         if (!userGuess) {
-          messageEl.textContent = 'No number! Try again!';
+          changeTextContent(messageEl, 'No number! Try again!');
           return;
         }
 
         // Win
         if (userGuess === secretNumber) {
-          hiddenNumberEl.textContent = secretNumber;
-          messageEl.textContent = '🎉 Correct number!';
+          changeTextContent(hiddenNumberEl, secretNumber);
+          changeTextContent(messageEl, '🎉 Correct number!');
+
           bodyEl.style.backgroundColor = '#4caf50';
 
           if (currentScore > highScore) {
@@ -72,30 +74,25 @@ function game() {
           return;
         }
 
-        // This could become a ternary operator!
-        /* It has value for true and false.(checking one condition)
-        if (userGuess > secretNumber) {
-          messageEl.textContent = 'Too High!';
-        } else if (userGuess < secretNumber) {
-          messageEl.textContent = 'Too Low!';
-        }
-        */
-        // Like this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
-        messageEl.textContent =
-          userGuess > secretNumber ? 'Too High!' : 'Too Low!';
+        changeTextContent(
+          messageEl,
+          userGuess > secretNumber ? 'Too High!' : 'Too Low!',
+        );
 
         decreaseScore(scoreEl);
 
         if (currentScore === 0) {
-          messageEl.textContent = "You've lost! Try Again!";
+          changeTextContent(messageEl, "You've lost! Try Again!");
           checkBtn.disabled = true;
         }
       } else if (className === 'btn again') {
-        currentScore = maxNumber;
-        scoreEl.textContent = currentScore;
         secretNumber = getRandomNumber(minNumber, maxNumber);
-        hiddenNumberEl.textContent = '?';
-        messageEl.textContent = 'Start Guessing...';
+        currentScore = maxNumber;
+
+        changeTextContent(scoreEl, currentScore);
+        changeTextContent(hiddenNumberEl, '?');
+        changeTextContent(messageEl, 'Start Guessing...');
+
         bodyEl.style.backgroundColor = '#222222';
         inputEl.value = '';
         checkBtn.disabled = false;
