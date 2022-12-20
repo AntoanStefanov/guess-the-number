@@ -23,6 +23,7 @@
                 "asyncArrow": "always"
             }
         ],
+
         // https://eslint.org/docs/latest/rules/quotes -> messageEl.textContent = "You've lost! Try Again!";
         "quotes": [
             "error",
